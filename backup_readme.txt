@@ -19,5 +19,5 @@ Example for Restore (to a new collection)
 
 * mongosh $MONGODB_URI --eval 'db.getSiblingDB("api_pass").getCollection("pass_data2").drop()'
 * mongorestore --uri=$MONGODB_URI --archive=api_pass_pass_data.20260916.archive.gz --gzip --nsFrom='api_pass.pass_data' --nsTo='api_pass.pass_data2'
-* mongorestore --uri=$MONGODB_URI --archive=api_pass_pass_data.20260916.archive.gz --gzip --nsFrom='api_pass.pass_data' --nsTo='api_pass.tmp_pass_data2'
+* mongorestore --uri=$MONGODB_URI --archive=api_pass_pass_data.202609161330.gz --gzip --nsFrom='api_pass.pass_data' --nsTo='api_pass.tmp_pass_data2'
 * mongosh $MONGODB_URI --eval 'db.getSiblingDB("api_pass").getCollection("tmp_pass_data2").aggregate([{$merge: "pass_data2"}])'
