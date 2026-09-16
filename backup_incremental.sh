@@ -5,7 +5,8 @@ DB_NAME="hr"
 
 # Make collection names dynamic
 #COLL_NAME=("people" "departments")
-mapfile -t COLL_NAME < <(mongosh $MONGO_URI --eval 'db.getSiblingDB("'$DB_NAME'").runCommand({listCollections: 1}).cursor.firstBatch.map(e => e.name)' | tail -n +2 | head -n -1 | sed 's/ //g' | sed 's/,//' | sed "s/'//g")
+#mapfile -t COLL_NAME < <(mongosh $MONGO_URI --eval 'db.getSiblingDB("'$DB_NAME'").runCommand({listCollections: 1}).cursor.firstBatch.map(e => e.name)' | tail -n +2 | head -n -1 | sed 's/ //g' | sed 's/,//' | sed "s/'//g")
+mapfile -t COLL_NAME < <(mongosh $MONGO_URI --eval "db.getSiblingDB('$DB_NAME').runCommand({listCollections: 1}).cursor.firstBatch.map(e => e.name)" | sed "s/'/\"/g" | jq -r '.[]')
 
 # TODO 1: Make date-time dynamic (1 hour ago in UTC ISO-8601 format)
 if date -u -d "1 hour ago" +"%Y-%m-%dT%H:%M:%SZ" >/dev/null 2>&1; then
