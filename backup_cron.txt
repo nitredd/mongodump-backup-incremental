@@ -1,0 +1,3 @@
+0 * * * * /path/to/your/script/backup_incremental.sh
+0 0 * * * /path/to/your/script/backup_full.sh
+0 0 * * * find /path/to/directory -type f -mtime +2 -delete
