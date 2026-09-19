@@ -21,3 +21,8 @@ Example for Restore (to a new collection)
 * mongorestore --uri=$MONGODB_URI --archive=api_pass_pass_data.20260916.archive.gz --gzip --nsFrom='api_pass.pass_data' --nsTo='api_pass.pass_data2'
 * mongorestore --uri=$MONGODB_URI --archive=api_pass_pass_data.202609161330.gz --gzip --nsFrom='api_pass.pass_data' --nsTo='api_pass.tmp_pass_data2'
 * mongosh $MONGODB_URI --eval 'db.getSiblingDB("api_pass").getCollection("tmp_pass_data2").aggregate([{$merge: "pass_data2"}])'
+
+Future Improvement
+
+* Try using mongoexport-mongoimport for the incremental backup and restore, because they can merge into existing collections, unlike mongodump-mongorestore
+* Try using mongodump-mongorestore for capturing the oplog with a namespace query filter for the incremental
